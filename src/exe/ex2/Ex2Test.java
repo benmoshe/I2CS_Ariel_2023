@@ -157,7 +157,7 @@ class Ex2Test {
 	 * Tests is the sameValue function is symmetric.
 	 */
 	public void testSameValue2() {
-		double x1=0, x2=4;
+		double x1=-4, x2=0;
 		double rs1 = Ex2.sameValue(po1,po2, x1, x2, Ex2.EPS);
 		double rs2 = Ex2.sameValue(po2,po1, x1, x2, Ex2.EPS);
 		assertEquals(rs1,rs2,Ex2.EPS);
@@ -167,7 +167,7 @@ class Ex2Test {
 	 * Test the area function - it should be symmetric.
 	 */
 	public void testArea() {
-		double x1=0, x2=4;
+		double x1=-4, x2=0;
 		double a1 = Ex2.area(po1, po2, x1, x2, 100);
 		double a2 = Ex2.area(po2, po1, x1, x2, 100);
 		assertEquals(a1,a2,Ex2.EPS);
