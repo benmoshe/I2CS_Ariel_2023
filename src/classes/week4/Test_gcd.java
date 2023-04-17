@@ -7,9 +7,8 @@ public class Test_gcd {
 		int a=34,b=55;
 		
 		// Math.sqrt();
-		int g = GCD4.gcd2(a, b);
+		long g = GCD4.gcd2(a, b);
 		System.out.println(g);
 		double d = Math.log10(g);
 	}
-
 }

@@ -1,8 +1,8 @@
 package classes.week4;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.fail;
 
 class Week4ClassExamplesTest {
 
@@ -15,7 +15,6 @@ class Week4ClassExamplesTest {
 				fail("Should be a perfect number "+perfects[i]);
 			}
 		}
-		
 	}
 	@Test
 	void testIsNotPerfect() {
@@ -26,7 +25,5 @@ class Week4ClassExamplesTest {
 				fail("Should be a perfect number "+none_perfects[i]);
 			}
 		}
-		
 	}
-
 }

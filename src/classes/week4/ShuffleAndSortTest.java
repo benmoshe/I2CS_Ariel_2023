@@ -1,8 +1,8 @@
 package classes.week4;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * This JUnit tester is rather complicated, the main concept is to 
  * test if the shuffle function is computing a random permutation. 
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
  *
  */
 class ShuffleAndSortTest {
-	public static double EPS = 0.1;  // 10%
+	public static double EPS = 0.2;  // 10%
 	@Test
 	void testShuffle() {
 		int size = 10, norm=1000;

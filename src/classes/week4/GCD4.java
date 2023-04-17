@@ -9,7 +9,7 @@ package classes.week4;
 import java.util.Scanner;
 
 public class GCD4 {
-	static boolean debug_flag = true;
+	static boolean debug_flag = false;
 	public static void main(String[] args) {
 		// create a scanner so we can read the command-line input
 		Scanner scanner = new Scanner(System.in);
@@ -19,7 +19,7 @@ public class GCD4 {
 			int x = scanner.nextInt();
 			System.out.print("Enter in integer y=");
 			int y = scanner.nextInt();
-			int g = 0;
+			long g = 0;
 			if(flag==1) {
 				g=gcd1(x,y);
 			}
@@ -33,23 +33,24 @@ public class GCD4 {
 		System.out.println("Bye Bye...");
 	}
 	/**
-	 * This is a simplify (not so efficient) implementation of GCD algorithm, as in
-	 * https://en.wikipedia.org/wiki/Euclidean_algorithm
+	 * This is an inefficient implementation of GCD algorithm, simple search.
 	 * @param x
 	 * @param y
 	 * @return the Greater Common Divider (GCD) of x and y.
 	 */
-	public static int gcd1(int x, int y) {
-		if(x<y) {	int t=x; x=y; y=t;}
-		int i=0;
-		while(x%y!=0) {
-			if(debug_flag) {
-				System.out.print("gcd_"+i+"("+x+","+y+")=");}
-			x=x%y;
-			i=i+1;
-			if(x<y) {int t=x; x=y; y=t;}
+	public static long gcd1(long x, long y) {
+		if(x<y) {	long t=x; x=y; y=t;}
+		long ans=1, n=2;
+		while(x>=n && y>=n) {
+			if (x % n == 0 && y % n == 0) {
+				ans = n;
+				if (debug_flag) {
+					System.out.print(n + " divides: " + x + "," + y);
+				}
+			}
+			n = n + 1;
 		}
-		return y;
+		return ans;
 	}
 	/**
 	 * This is a simplify (not so efficient) implementation of GCD algorithm, as in
@@ -58,7 +59,7 @@ public class GCD4 {
 	 * @param y
 	 * @return the Greater COmmon Divider (GCD) of x and y.
 	 */
-	public static int gcd2(int x, int y) {
+	public static long gcd2(long x, long y) {
 		while (x != y) {
 			if(debug_flag) {
 				System.out.print("gcd("+x+","+y+")=");}
@@ -66,5 +67,14 @@ public class GCD4 {
             else {y=y-x;}
         }
 		return y;
+	}
+	public static long gcd3(long x, long y) {
+		while (y != 0)  {long t = y; y=x%y; x=t;}
+		return x;
+	}
+	public static long gcd4(long x, long y) {
+		// if b=0, a is the GCD
+		if (y == 0)  {return x;}
+		return gcd4(y, x % y);
 	}
 }

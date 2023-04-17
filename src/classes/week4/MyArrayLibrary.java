@@ -16,7 +16,7 @@ public class MyArrayLibrary {
 	 * This function creates an array of random integers 
 	 * each in the range of [min,max]
 	 * @param size
-	 * @param [min,max] as a range
+	 * @param min,max as a range
 	 * @return
 	 */
 	public static int[] randomIntArray(int size, int min, int max){
@@ -62,7 +62,7 @@ public class MyArrayLibrary {
 	}
 /**
  * This function computes the average of all the array values.
- * @param arr1
+ * @param arr
  * @return
  */
 	public static double average(int[] arr) {
