@@ -96,4 +96,24 @@ public class MyArrayLibrary {
 		}
 		return ans;
 	}
+	public static int minIndex(int[] arr, int minInd) {
+		int ans = minInd;
+		for(int i=minInd+1;i<arr.length;i=i+1) {
+			if(arr[i]<arr[ans]) {ans = i;}
+		}
+		return ans;
+	}
+	public static void swap(int[] arr, int i1, int i2) {
+		int t = arr[i1];
+		arr[i1] = arr[i2];
+		arr[i2] = t;
+	}
+	public static void sort(int[] arr) {
+		if(arr!=null && arr.length>1) {
+			for(int i=0;i<arr.length;i=i+1) {
+				int minI = minIndex(arr,i);
+				swap(arr, i, minI);
+			}
+		}
+	}
 }

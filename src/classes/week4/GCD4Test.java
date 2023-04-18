@@ -77,6 +77,7 @@ class GCD4Test {
     }
     @Test
     @Timeout(value = 10, unit = MILLISECONDS)
+    // https://junit.org/junit5/docs/5.9.1/api/org.junit.jupiter.api/org/junit/jupiter/api/Timeout.html
     public void testGcd_RT2() {
         long g = 2*3*5*7*11*13*17*19*23;
         long x = g*31;

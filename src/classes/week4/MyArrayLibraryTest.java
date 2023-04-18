@@ -67,4 +67,14 @@ class MyArrayLibraryTest {
 		// if(err>max_value/10.0) {
 			// fail("Wrong average");}
 	}
+	@Test
+	public void testSort() {
+		int[] a1= {17,3,-2,12,9};
+		MyArrayLibrary.sort(a1);
+		boolean ok = true;
+		for(int i=0;i<a1.length-1;i=i+1) {
+			if(a1[i]>a1[i+1]) {ok = false;}
+		}
+		if(!ok) {fail("Error: a the array is not sorted!");}
+	}
 }

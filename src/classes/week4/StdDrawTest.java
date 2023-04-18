@@ -48,6 +48,8 @@ public class StdDrawTest {
 			StdDraw.filledCircle(x, y, 0.1);
 			StdDraw.setPenColor(StdDraw.BLACK);
 			StdDraw.filledCircle(-x, -y, 0.05);
+			StdDraw.setPenColor(StdDraw.CYAN);
+			StdDraw.filledCircle(x*1.2, -y/2, 0.15);
 			StdDraw.show();
 			StdDraw.pause(20);
 		}

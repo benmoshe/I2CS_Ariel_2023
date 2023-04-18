@@ -14,6 +14,8 @@ public class GCD4 {
 		// create a scanner so we can read the command-line input
 		Scanner scanner = new Scanner(System.in);
 		int flag = 1;
+
+		String s = "abc";
 		while(flag == 1 || flag ==2) {
 			System.out.print("Enter in integer x=");
 			int x = scanner.nextInt();

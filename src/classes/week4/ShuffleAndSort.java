@@ -34,6 +34,7 @@ public class ShuffleAndSort {
         int n = a.length;
         for (int i = 0; i < n; i++) {
             int r = i+ (int) (Math.random() * (n-i));   // between i and n-1
+           //int r =  (int) (Math.random() * (n));
             exch(a, i, r);
         }
     }
@@ -41,7 +42,7 @@ public class ShuffleAndSort {
     public static void sort(String[] arr) {
     	int len = arr.length;
     	for(int i=0;i<len;i=i+1) {
-    		int min = maxInd(arr,i,len); // min index(min,lenght)
+    		int min = minInd(arr,i,len); // min index(min,lenght)
     		exch(arr,i,min); 			 // swaps the ith index with the min(i,min)
     	}
     }
