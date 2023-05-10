@@ -22,7 +22,7 @@ package exe.ex3;
  */
 public interface Map2D {
 	/**
-	 * Construct a 2D w*h matrix of double.
+	 * Construct a 2D w*h matrix of integers.
 	 * @param w the width of the underlying 2D array.
 	 * @param h the height of the underlying 2D array.
 	 * @param v the init value of all the entries in the 2D array.
