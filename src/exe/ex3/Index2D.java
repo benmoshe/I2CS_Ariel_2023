@@ -27,8 +27,11 @@ public class Index2D implements Pixel2D{
     @Override
     public boolean equals(Object t) {
         boolean ans = false;
-       /////// add your code below ///////
-
+       /////// you do NOT need to add your code below ///////
+        if(t!=null && t instanceof Pixel2D) {
+            Pixel2D p = (Pixel2D) t;
+            ans = this.distance2D(p)==0;
+        }
        ///////////////////////////////////
         return ans;
     }
