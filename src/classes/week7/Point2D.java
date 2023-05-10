@@ -30,9 +30,9 @@ public class Point2D {
      * @param p - the original point (to be copied).
       */
     public Point2D(Point2D p) {
-       this(p.x(), p.y());
-    //	_x = p.x();
-    //	this._y = p.y();
+        //this(p.x(), p.y());
+    	_x = p.x();
+    	this._y = p.y();
     }
     /**
      * String Constructor  
