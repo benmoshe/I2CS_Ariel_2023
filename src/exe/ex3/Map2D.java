@@ -121,7 +121,7 @@ public interface Map2D {
 	 * @param p1 first coordinate (start point).
 	 * @param p2 second coordinate (end point).
 	 * @param obsColor the color which is addressed as an obstacle.
-	 * @return the shortest path as an array of consecutive pixels.
+	 * @return the shortest path as an array of consecutive pixels, if none - returns null.
 	 */
 	public Pixel2D[] shortestPath(Pixel2D p1, Pixel2D p2, int obsColor);
 
