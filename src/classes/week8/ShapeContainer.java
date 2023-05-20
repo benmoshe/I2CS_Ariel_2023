@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * This class represents a collection of GeoShape implemented by using (containing) an ArrayList<GeoShape>
+ */
 public class ShapeContainer {
 	private ArrayList<GeoShape> _shapes;
 	
