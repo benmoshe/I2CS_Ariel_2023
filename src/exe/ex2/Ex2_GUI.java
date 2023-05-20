@@ -27,8 +27,8 @@ public class Ex2_GUI {
 	
 	public static void testGUI(double[] po1, double[] po2, double min, double max, int samples) {
 		int n=1000;
-		double x1 = Ex2.sameValue(po1,po2, -10,-5,Ex2.EPS);
-		double x2 = Ex2.sameValue(po1,po2, 5,10,Ex2.EPS);
+		double x1 = Ex2_Sol.sameValue(po1,po2, -10,-5,Ex2_Sol.EPS);
+		double x2 = Ex2_Sol.sameValue(po1,po2, 5,10,Ex2_Sol.EPS);
 		double area1 = 0;
 		StdDraw.setPenColor(StdDraw.GRAY);
 		drawGrid(min,max);
@@ -43,15 +43,15 @@ public class Ex2_GUI {
 		drawInfo(po1,0,-8);
 		drawInfo(po2,0,7);
 		
-		double area = Ex2.area(po1, po2, x1, 6, samples);
+		double area = Ex2_Sol.area(po1, po2, x1, 6, samples);
 		StdDraw.text(0,-9,"Area: "+samples+": "+area);
 	}
 	public static void drawPoly(double[] poly, double x1, double x2, int numberOfElements) {
 		double x0=x1;
-		double y0 = Ex2.f(poly, x0);
+		double y0 = Ex2_Sol.f(poly, x0);
 		double delta = (x2-x1)/numberOfElements;
 		for(double x = x1+delta;x<=x2;x+=delta) {
-			double y1 = Ex2.f(poly, x);
+			double y1 = Ex2_Sol.f(poly, x);
 			StdDraw.line(x0, y0, x, y1);
 			x0=x;
 			y0 = y1;
@@ -59,12 +59,12 @@ public class Ex2_GUI {
 	} 
 	public static void drawArea(double[] p1, double[] p2, double x1, double x2, int numberOfElements) {
 		double x0=x1;
-		double y01 = Ex2.f(p1, x0);
-		double y02 = Ex2.f(p2, x0);
+		double y01 = Ex2_Sol.f(p1, x0);
+		double y02 = Ex2_Sol.f(p2, x0);
 		double delta = (x2-x1)/numberOfElements;
 		for(double x = x1+delta;x<=x2;x+=delta) {
-			double y11 = Ex2.f(p1, x);
-			double y12 = Ex2.f(p2, x);
+			double y11 = Ex2_Sol.f(p1, x);
+			double y12 = Ex2_Sol.f(p2, x);
 			double[] xx = {x0,x,x,x0};
 			double[] yy = {y01,y11,y12,y02};
 			StdDraw.setPenColor(StdDraw.YELLOW);
@@ -77,7 +77,7 @@ public class Ex2_GUI {
 		} 
 	} 
 	public static void drawInfo(double[] poly, double x, double y) {
-		String s = Ex2.poly(poly);
+		String s = Ex2_Sol.poly(poly);
 		StdDraw.text(x,y,s);
 	}
 	public static void drawGrid(double min, double max) {
