@@ -1,7 +1,6 @@
 
 package exe.ex4.geo;
 
-import exe.ex4.ex4.Ex4_Const;
 
 /**
  * This class represents a 2D point in the plane.
@@ -69,10 +68,7 @@ public class Point_2D {
     {
         return ( this.distance(p2) < eps );
     }
-    public boolean close2equals(Point_2D p2)
-    {
-        return close2equals(p2, Ex4_Const.EPS);
-    }
+
     /**
      * This method returns the vector between this point and the target point. The vector is represented as a Point2D.
      * @param target
