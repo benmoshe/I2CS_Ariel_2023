@@ -173,10 +173,9 @@ public class BinaryTreeAlgo {
 		return ans;
 	}
 	/**
-	 * A nice trick for save and load objects
-	 * @param <T> the type of the binary tree.
-	 * @param bt
-	 * @param name
+	 *  A nice trick for save and load objects
+	 * @param ob - the object to be saved
+	 * @param name - the name of the file/
 	 */
 	public static void save(Object ob, String name) {
 		try{
