@@ -15,14 +15,17 @@ public class Circle_2D implements GeoShape{
 		this._center = new Point_2D(cen);
 		this._radius = rad;
 	}
+	public Circle_2D(Circle_2D c) {
+		this(c.getCenter(), c.getRadius());
+	}
 	public double getRadius() {return this._radius;}
 	public Point_2D getCenter(){ return _center;}
 	 @Override
 	    public String toString()
 	    {
 			////// add your code here //////
-
-			return null;
+			return _center.toString()+", "+_radius;
+			//return null;
 			////////////////////////////////
 		}
 	@Override
@@ -56,8 +59,8 @@ public class Circle_2D implements GeoShape{
 	@Override
 	public GeoShape copy() {
 		////// add your code here //////
-
-		return null;
+		return new Circle_2D(this);
+		//return null;
 		////////////////////////////////
 	}
 
