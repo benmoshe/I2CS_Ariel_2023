@@ -82,12 +82,13 @@ class ShapeContainerTest {
 			System.out.println(i+") "+sc.get(i));
 		}
 		for(int i=1;i<size;i++) {
-			String s1 = sc.get(i-1).toString();
+			String s1 = sc.get(i - 1).toString();
 			String s2 = sc.get(i).toString();
 			int d = s1.compareTo(s2);
-			if(d>0) {fail("Not sorted by toString");}
+			if (d > 0) {
+				fail("Not sorted by toString");
+			}
 		}
-		
 	}
 
 }

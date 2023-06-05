@@ -44,7 +44,7 @@ public class ShapeContainer3 {
 			}
 			this._ind--;
 			if(size()*2<this.capacity() && this.capacity()>INIT_SIZE) {
-				int n = (size() + this.capacity())/2;
+				int n = (size()*2);
 				this.resize(n);
 			}
 		}

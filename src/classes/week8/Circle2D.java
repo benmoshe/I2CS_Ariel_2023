@@ -5,11 +5,14 @@ import classes.week7.Point2D;
 public class Circle2D implements GeoShape{
 	private Point2D center = null;
 	private double _rad;
+	private static int _counter =0;
 	
 	public Circle2D(Point2D c, double r) {
 		center = new Point2D(c);
 		this._rad = r;
+		_counter++;
 	}
+	public static int get_counter() {return _counter;}
 	public Circle2D(Circle2D c) {
 		this(c.center, c._rad);
 	}
@@ -24,6 +27,7 @@ public class Circle2D implements GeoShape{
     	double r = Double.parseDouble(a[3]);
     	center = new Point2D(x,y);
     	_rad = r;
+		_counter++;
 	}
 
 	public double getRad() {return _rad;}
@@ -33,6 +37,9 @@ public class Circle2D implements GeoShape{
 	 */
 	public String toString() {
 		String ans = this.getClass().getSimpleName()+": " + center.toString()+","+this.getRad();
+		return ans;
+	}public String toStringNeto() {
+		String ans = this.getClass().getSimpleName()+", " + center.toString()+","+this.getRad();
 		return ans;
 	}
 	@Override
