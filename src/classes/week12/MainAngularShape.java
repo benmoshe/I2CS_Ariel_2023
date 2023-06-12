@@ -1,9 +1,9 @@
-package classes.week13;
+package classes.week12;
+
+import java.awt.Color;
 
 import classes.week4.StdDraw;
 import classes.week7.Point2D;
-
-import java.awt.*;
 
 public class MainAngularShape {
 
