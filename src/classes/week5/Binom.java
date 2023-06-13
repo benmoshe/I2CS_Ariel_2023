@@ -35,7 +35,7 @@ public class Binom {
 		}
 		return binomFast(n, k, res);
 	}
-	public static int binomFast(int n, int k, int[][] res2d) {
+	private static int binomFast(int n, int k, int[][] res2d) {
 		int ans = res2d[n][k];
 		if(ans==-1) {
 		//	System.out.println("binom("+n+","+k+") = b("+(n-1)+","+(k-1)+") + b("+(n-1)+","+k+")");

@@ -66,7 +66,7 @@ public class Point2D {
     	this._x += p.x();
     	_y += p.y();
     }
-
+@Override
     public String toString()
     {
         return _x+","+_y;
@@ -93,19 +93,17 @@ public class Point2D {
          double t = (dx*dx+dy*dy);
          return Math.sqrt(t);
      }
-    /**
+
+     /**
      *  return true iff: this point equils to p.
      */
-    public boolean equals(Object p)
+
+     @Override
+     public boolean equals(Object p)
     {
         if(p==null || !(p instanceof Point2D)) {return false;}
         Point2D p2 = (Point2D)p;
         return ( (_x==p2._x) && (_y==p2.y()));
-    }
-    public boolean equals(Point2D p)
-    {
-        if(p==null) {return false;}
-        return ( (_x==p._x) && (_y==p._y));
     }
     public boolean close2equals(Point2D p2, double eps)
     {

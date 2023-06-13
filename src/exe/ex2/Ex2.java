@@ -31,7 +31,7 @@ public class Ex2 {
 	}
 	/** Given a polynom (p), a range [x1,x2] and an epsilon eps. 
 	 * This function computes an x value (x1<=x<=x2) for which |p(x)| < eps, 
-	 * assuming p(x1)*p(x1) <= 0. 
+	 * assuming p(x1)*p(x2) <= 0.
 	 * This function should be implemented recursively.
 	 * @param p - the polynom
 	 * @param x1 - minimal value of the range
@@ -44,7 +44,7 @@ public class Ex2 {
 		double f2 = f(p,x2);
 		double x12 = (x1+x2)/2;
 		double f12 = f(p,x12);
-		if (f1*f2<=0 && Math.abs(f12)<eps) {return x12;}
+		if (Math.abs(f12)<eps) {return x12;}
 		if(f12*f1<=0) {return root_rec(p, x1, x12, eps);}
 		else {return root_rec(p, x12, x2, eps);}
 	}

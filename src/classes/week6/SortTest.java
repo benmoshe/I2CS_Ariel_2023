@@ -1,13 +1,15 @@
 package classes.week6;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.concurrent.TimeUnit;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
+
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class SortTest {
 	public static final int K = 1000, M = K*K;
@@ -23,6 +25,7 @@ class SortTest {
 		arrK = MyArrayLibrary.randomIntArray(K, K);
 		arrM = MyArrayLibrary.randomIntArray(M, M);
 		arrDoubleM = MyArrayLibrary.randomDoubleArray(M, 0, M);
+		Arrays.sort(arrK);
 	}
 	@Test 
 	void testMergeSort() {

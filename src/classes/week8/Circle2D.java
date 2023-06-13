@@ -33,7 +33,8 @@ public class Circle2D implements GeoShape{
 	public double getRad() {return _rad;}
 	public Point2D getCenter() {return new Point2D(center);} // new Point2D(_cen);
 	/**
-	 * 1,2,3 ==> Circle: _center: (1,2), radius: 3 
+	 * 1,2,3 ==> Circle: _center: (1,2), radius: 3
+	 * double r = Math.random(); [0,1);
 	 */
 	public String toString() {
 		String ans = this.getClass().getSimpleName()+": " + center.toString()+","+this.getRad();

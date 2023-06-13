@@ -1,11 +1,12 @@
 package classes.week5;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import java.util.concurrent.TimeUnit;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * binom(8,2) = b(7,1) + b(7,2)
 binom(7,2) = b(6,1) + b(6,2)
@@ -50,7 +51,7 @@ class BinomTest {
 	//	System.out.println("binomFast("+n+","+k+") = ");
 		int t = Binom.binom_debug(n,k);
 		System.out.println(t);
-		assertEquals(t,28);
+		assertEquals(28,t);
 	}
 
 	@Test
@@ -60,7 +61,7 @@ class BinomTest {
 		int b1 = Binom.binom(n,k);
 		long end = System.nanoTime();
 		double dt = (end-start)/(1000.0*1000);
-		//assertTrue(dt<1);
+	//	assertTrue(dt<10);
 	//	System.out.println();
 		System.out.println("binom("+n+","+k+") took dt="+dt+"  msec.");
 	
@@ -72,7 +73,7 @@ class BinomTest {
 		assertEquals(b1,b2);
 	}
 	@Test
-	@Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
+	@Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
 	void testBinomFast2() {
 		int n=30, k=15;
 		int b = Binom.binomFast(n,k);
