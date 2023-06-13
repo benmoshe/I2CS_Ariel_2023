@@ -10,6 +10,7 @@ import exe.ex4.gui.StdDraw_Ex4;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 /**
  * 
@@ -111,8 +112,8 @@ public class Ex4 implements Ex4_GUI {
 		if(p.equals("Fill")) {_fill = true; setFill();}
 		if(p.equals("Empty")) {_fill = false; setFill();}
 		if(p.equals("Clear")) {_shapes.removeAll();}
-	
-		
+		if(p.equals("Save")) {save();}
+		if(p.equals("Load")) {load();}
 		drawShapes();
 		
 	}
@@ -202,5 +203,21 @@ public class Ex4 implements Ex4_GUI {
 			ans +=s.toString()+"\n";
 		}
 		return ans;
+	}
+	private void save() {
+		FileDialog chooser = new FileDialog(StdDraw_Ex4.getFrame(), "Save to Text file", FileDialog.SAVE);
+		chooser.setVisible(true);
+		String filename = chooser.getFile();
+		if (filename != null) {
+			_shapes.save(chooser.getDirectory() + File.separator + chooser.getFile());
+		}
+	}
+	private void load() {
+		FileDialog chooser = new FileDialog(StdDraw_Ex4.getFrame(), "Load from Text file", FileDialog.LOAD);
+		chooser.setVisible(true);
+		String filename = chooser.getFile();
+		if (filename != null) {
+			_shapes.load(chooser.getDirectory() + File.separator + chooser.getFile());
+		}
 	}
 }
