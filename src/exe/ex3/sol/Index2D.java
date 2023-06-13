@@ -1,6 +1,8 @@
-package exe.ex3;
+package exe.ex3.sol;
 
-public class Index2D implements Pixel2D{
+import java.io.Serializable;
+
+public class Index2D implements Pixel2D, Serializable{
     private int _x, _y;
     public Index2D() {this(0,0);}
     public Index2D(int x, int y) {_x=x;_y=y;}
@@ -9,15 +11,16 @@ public class Index2D implements Pixel2D{
     public int getX() {
         return _x;
     }
+
     @Override
     public int getY() {
         return _y;
     }
     public double distance2D(Pixel2D t) {
-        double ans = 0;
-        /////// add your code below ///////
-
-        ///////////////////////////////////
+        if(t==null) {throw new RuntimeException("ERR: got null for the Pixel2D:distance2D method");}
+        double dx = t.getX()-this.getX();
+        double dy = t.getY()-this.getY();
+        double ans = Math.sqrt(dx*dx + dy*dy);
         return ans;
     }
     @Override
@@ -27,12 +30,11 @@ public class Index2D implements Pixel2D{
     @Override
     public boolean equals(Object t) {
         boolean ans = false;
-       /////// you do NOT need to add your code below ///////
         if(t instanceof Pixel2D) {
-            Pixel2D p = (Pixel2D) t;
-            ans = (this.distance2D(p)==0);
+            if(((Pixel2D) t).getX() == this.getX() && ((Pixel2D) t).getY()==this.getY()) {
+                ans = true;
+            }
         }
-       ///////////////////////////////////
         return ans;
     }
 }
