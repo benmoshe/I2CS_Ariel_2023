@@ -73,7 +73,11 @@ public class GUIShape implements GUI_Shape{
 	}
 	@Override
 	public String toString() {
-		return null;
+		int co = _color.getBlue();
+		co += _color.getGreen()*256;
+		co += _color.getRed()*256*256;
+		String ans = ""+this.getClass().getSimpleName()+","+co+","+_fill+","+_tag+","+this._g.getClass().getSimpleName()+","+_g.toString();
+		return ans;
 	}
 	private void init(String[] ww) {
 
