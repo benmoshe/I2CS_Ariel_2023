@@ -7,6 +7,13 @@ public class Index2D implements Pixel2D, Serializable{
     public Index2D() {this(0,0);}
     public Index2D(int x, int y) {_x=x;_y=y;}
     public Index2D(Pixel2D t) {this(t.getX(), t.getY());}
+
+    public Index2D(String pos) {
+        String[] s = pos.split(",");
+        _x = Integer.parseInt(s[0]);
+        _y = Integer.parseInt(s[1]);
+    }
+
     @Override
     public int getX() {
         return _x;
