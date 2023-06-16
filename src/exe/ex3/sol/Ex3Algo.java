@@ -83,5 +83,20 @@ public class Ex3Algo implements PacManAlgo{
 		}
 		return ans;
 	}
-
+	private static Map min(Map2D m1, Map2D m2) {
+		Map ans = null;
+		if(m1!=null && m2 !=null) {
+			int[][] a1 = m1.getMap();
+			int[][] a2 = m2.getMap();
+			for(int i=0;i<a1.length;i++) {
+				for(int j=0;j<a1[0].length;j++) {
+					int c1 = a1[i][j];
+					int c2 = a1[i][j];
+					if(c2>0 && c2<c1) {a1[i][j] = c2;}
+				}
+			}
+			ans = new Map(a1);
+		}
+		return ans;
+	}
 }

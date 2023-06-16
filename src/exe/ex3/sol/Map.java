@@ -92,17 +92,28 @@ public class Map implements Map2D, Serializable{
 		int old_v = this.getPixel(x, y);
 		ArrayList<Pixel2D> front = new ArrayList<Pixel2D>();
 		front.add(new Index2D(x,y));
+		int w = this.getWidth();
+		int h = this.getHeight();
 		while(!front.isEmpty()) {
 			Pixel2D p = front.remove(0);
+
 			if(isInside(p)) {
 				int v = this.getPixel(p);
 				if(v==old_v  && v!=new_v) {
 					this.setPixel(p, new_v);
 					ans++;
-					front.add(new Index2D(p.getX()+1, p.getY()));
-					front.add(new Index2D(p.getX()-1, p.getY()));
-					front.add(new Index2D(p.getX(), p.getY()-1));
-					front.add(new Index2D(p.getX(), p.getY()+1));
+					int y1 = (p.getY()+1);
+					if(this.isCyclic()) {y1=y1%h;}
+					int y0 = (p.getY()-1);
+					if(y0==-1 && this.isCyclic()) {y0=h-1;}
+					int x1 = (p.getX()+1);
+					if(this.isCyclic()) {x1=x1%w;}
+					int x0 = (p.getX()-1);
+					if(x0==-1 && this.isCyclic()) {x0=w-1;}
+					front.add(new Index2D(x1, p.getY()));
+					front.add(new Index2D(x0, p.getY()));
+					front.add(new Index2D(p.getX(), y0));
+					front.add(new Index2D(p.getX(), y1));
 				}
 			}
 		}
@@ -251,7 +262,23 @@ public class Map implements Map2D, Serializable{
 		}
 		return map;
 	}
-
+	@Override
+	public boolean equals(Object ob) {
+		boolean ans = false;
+		if(ob instanceof Map2D) {
+			Map2D ot = (Map2D)ob;
+			if(ot.getHeight() == this.getHeight() && ot.getWidth() == this.getWidth() && ot.isCyclic() == this.isCyclic()) {
+				ans = true;
+				for(int i=0;i<this.getWidth() && ans;i++) {
+					for(int j=0;j<this.getHeight();j++) {
+						Pixel2D p = new Index2D(i,j);
+						if(this.getPixel(p) != ot.getPixel(i,j)) {ans = false;}
+					}
+				}
+			}
+		}
+		return ans;
+	}
 	////////////////////// Private ///////////////////////
 	/**
 	 * This function finds the "previous" neighbor in terms of distance.
