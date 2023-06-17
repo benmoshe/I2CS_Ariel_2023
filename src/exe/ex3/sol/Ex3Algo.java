@@ -17,15 +17,14 @@ import java.awt.*;
  * Your task is to implement (here) your PacMan algorithm.
  */
 public class Ex3Algo implements PacManAlgo{
-	private int _count;
 	private static final int BLUE = Game.getIntColor(Color.BLUE, 0);
 	private static final int PINK = Game.getIntColor(Color.PINK, 0);
 	private static final int BLACK = Game.getIntColor(Color.BLACK, 0);
 	private static final int GREEN = Game.getIntColor(Color.GREEN, 0);
 	public static final double MIN_TIME = 0.5;
 	public static final int GOTO_DIST = 10, MAX_RADIUS = 20;
-	public static final double RUN_FROM_DIST = 3;
-	public Ex3Algo() {_count=0;}
+	public static final double RUN_FROM_DIST = 5;
+	public Ex3Algo() {;}
 	@Override
 	/**
 	 *  Add a short description for the algorithm as a String.
@@ -35,12 +34,13 @@ public class Ex3Algo implements PacManAlgo{
 	}
 	@Override
 	/**
-	 * This ia the main method - that you should design, implement and test.
+	 * This ia the main Algorithm for the Pacman, it uses a simple state-machine of 3 states (PINK,GREEN, BLACK).
 	 */
 	public int move(PacmanGame game) {
 		int code = 0;
 		int[][] board = game.getGame(0);
 		Map map = new Map(board);
+		map.setCyclic(game.isCyclic());
 		Pixel2D pos = new Index2D( game.getPos(code));
 		GhostCL[] ghosts = game.getGhosts(code);
 		int dir = -1;//randomDir();
@@ -90,7 +90,7 @@ public class Ex3Algo implements PacManAlgo{
 	}
 	private static boolean isChasable(GhostCL g) {
 		Pixel2D p = new Index2D(g.getPos(0));
-		int dx = Math.abs(11- p.getX());
+		int dx = Math.abs(11- p.getX());  // this is an ugly hard codded "workaround: to avoid the pacman from running into the ghosts "yard".
 		int dy = Math.abs(11-p.getY());
 		return dx+dy>2;
 	}
@@ -114,8 +114,6 @@ public class Ex3Algo implements PacManAlgo{
 		int ind = (int)(Math.random()*dirs.length);
 		return dirs[ind];
 	}
-
-	///////////////////////////// Private methods ///////////////////////////////
 	private static int up(Map2D map, Pixel2D pos) {
 		int ans = -1;
 		int w = map.getWidth(), h= map.getHeight();
@@ -175,6 +173,7 @@ public class Ex3Algo implements PacManAlgo{
 		}
 		return ans;
 	}
+	/** Green state */
 	private static int gotoClosestGhost(Map2D dists, Pixel2D pos) {
 		int ans = -1;
 		int dist = dists.getPixel(pos);
@@ -190,6 +189,7 @@ public class Ex3Algo implements PacManAlgo{
 	}
 
 	//
+	/** Black state - run away from the closest ghost.*/
 	private static int runFromClosestGhost(Map2D dists, Pixel2D pos) {
 		int ans = -1;
 		int dist = dists.getPixel(pos);
@@ -203,6 +203,7 @@ public class Ex3Algo implements PacManAlgo{
 		if(right>0 && right==dist+1) {return Game.RIGHT;}
 		return ans;
 	}
+	/** Pink state: goto the closest pink dot. */
 	private static int closestPink(Map2D map, Pixel2D pos) {
 		int ans = -1;
 		Map2D dists = map.allDistance(pos,BLUE);

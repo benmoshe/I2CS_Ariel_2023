@@ -140,49 +140,8 @@ public class Map implements Map2D, Serializable{
 	 */
 	public Pixel2D[] shortestPath(Pixel2D p1, Pixel2D p2, int obsColor) {
 		Pixel2D[] ans = null;  // the result.
-		p1 = new Index2D(p1.getX(), p1.getY());
-		p2 = new Index2D(p2.getX(), p2.getY()); // copying the data --> to be on the safe side (aka avoid side effects).
-		//int c1 = this.getPixel(p1);
-		int w = this.getWidth();
-		int h = this.getHeight();
-			Map map = new Map(this.getWidth(), this.getHeight(),-1); // temporal map for BFS dist computations.
-			map.setPixel(p1, 0);
-			if(p1.equals(p2)) {  // in case the start and the end points are the same.
-				ans = new Pixel2D[1]; ans[0] = p1;
-			}
-			else {
-				boolean found = false;
-				ArrayList<Pixel2D> front = new ArrayList<Pixel2D>(); // the BFS front.
-				front.add(p1);
-				Pixel2D[] ni = new Pixel2D[4];
-				// the main loop - while not found & has more (new) cells to explore.
-				while(!found && !front.isEmpty()) {  
-					// This is the BFS implementation - removes from the beginning of the Queue/
-					Pixel2D c = front.remove(0);
-					int dist = map.getPixel(c);
-					if(c.equals(p2)) {found = true;}
-					else {
-						int y1 = (c.getY()+1);
-						if(this.isCyclic()) {y1=y1%h;}
-						int y0 = (c.getY()-1);
-						if(y0==-1 && this.isCyclic()) {y0=h-1;}
-						int x1 = (c.getX()+1);
-						if(this.isCyclic()) {x1=x1%w;}
-						int x0 = (c.getX()-1);
-						if(x0==-1 && this.isCyclic()) {x0=w-1;}
-						ni[0] = new Index2D(c.getX(), y1);
-						ni[1] = new Index2D(c.getX(), y0);
-						ni[2] = new Index2D(x0, c.getY());
-						ni[3] = new Index2D(x1, c.getY());
-						for(int i=0;i<4;i++) {
-							if(map.isInside(ni[i]) && map.getPixel(ni[i]) ==-1 && getPixel(ni[i])!=obsColor) {
-								// add to the end of the Queue
-								front.add(ni[i]);
-								map.setPixel(ni[i], dist+1);
-							}		
-						}
-					}
-				}
+		Map2D map = allDistance1(p1, obsColor, p2);
+		boolean found = map!=null && map.getPixel(p2)>=0;
 				// computes the actual path from the end-point to the starting point.
 				if(found) {
 					int dist = map.getPixel(p2);
@@ -196,7 +155,6 @@ public class Map implements Map2D, Serializable{
 					}
 					ans[0] = p1;
 				}
-			}
 		return ans;
 	}
 
@@ -219,7 +177,8 @@ public class Map implements Map2D, Serializable{
 		return x>=0 && y>=0 && x<this.getWidth() && y<this.getHeight();
 	}
 	@Override
-	public Map2D allDistance(Pixel2D start, int obsColor) {
+	public Map2D allDistance(Pixel2D start, int obsColor) {return allDistance1(start, obsColor, null);}
+	public Map2D allDistance2(Pixel2D start, int obsColor) {
 		Pixel2D[] ans = null;  // the result.
 		int h = this.getHeight();
 		int w = this.getWidth();
@@ -262,6 +221,59 @@ public class Map implements Map2D, Serializable{
 		}
 		return map;
 	}
+
+	/**
+	 * This is the main (BFS) algorithm fot computing all the distances from a source point.
+	 * @param start - the starting pixel
+	 * @param obsColor - the obstacle color
+	 * @param end - the end point target - if null computes "all the away"
+	 * @return - the new map with the distances from the the starting point (with respect to the given map and the obstacle color).
+	 */
+	private Map2D allDistance1(Pixel2D start, int obsColor, Pixel2D end) {
+		Pixel2D[] ans = null;  // the result.
+		int h = this.getHeight();
+		int w = this.getWidth();
+		start = new Index2D(start);
+		//int c1 = this.getPixel(start);
+		Map map = new Map(this.getWidth(), this.getHeight(), -1); // temporal map for BFS dist computations.
+		map.setCyclic(this.isCyclic());
+		int v = this.getPixel(start);
+		if(v!=obsColor) {
+			map.setPixel(start, 0);
+			boolean found = false;
+			ArrayList<Pixel2D> front = new ArrayList<Pixel2D>(); // the BFS front.
+			front.add(start);
+			Pixel2D[] ni = new Pixel2D[4];
+			// the main loop - while not found & has more (new) cells to explore.
+			while(!front.isEmpty() && !found) {
+				// This is the BFS implementation - removes from the beginning of the Queue/
+				Pixel2D c = front.remove(0);
+				if(c.equals(end)) {found = true;}
+				int dist = map.getPixel(c);
+				int y1 = (c.getY()+1);
+				if(this.isCyclic()) {y1=y1%h;}
+				int y0 = (c.getY()-1);
+				if(y0==-1 && this.isCyclic()) {y0=h-1;}
+				int x1 = (c.getX()+1);
+				if(this.isCyclic()) {x1=x1%w;}
+				int x0 = (c.getX()-1);
+				if(x0==-1 && this.isCyclic()) {x0=w-1;}
+				ni[0] = new Index2D(c.getX(), y1);
+				ni[1] = new Index2D(c.getX(), y0);
+				ni[2] = new Index2D(x0, c.getY());
+				ni[3] = new Index2D(x1, c.getY());
+				for(int i=0;i<4;i++) {
+					if(map.isInside(ni[i]) && map.getPixel(ni[i]) ==-1 && getPixel(ni[i])!=obsColor) {
+						// add to the end of the Queue
+						front.add(ni[i]);
+						map.setPixel(ni[i], dist+1);
+					}
+				}
+				// computes the actual path from the end-point to the starting point.
+			}
+		}
+		return map;
+	}
 	@Override
 	public boolean equals(Object ob) {
 		boolean ans = false;
@@ -287,7 +299,7 @@ public class Map implements Map2D, Serializable{
 	 * @param c
 	 * @return
 	 */
-	private Pixel2D findLast(Map map, Pixel2D c) {
+	private Pixel2D findLast(Map2D map, Pixel2D c) {
 		Pixel2D ans = null;
 		int d = map.getPixel(c);
 		int w = this.getWidth();
