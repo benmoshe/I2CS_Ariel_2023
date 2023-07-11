@@ -4,12 +4,8 @@ package exe.ex4.gui;
  * Ex4: you should implement this class!
  * @author I2CS
  */
-
 import exe.ex4.geo.GeoShape;
-
 import java.awt.*;
-
-
 
 public class GUIShape implements GUI_Shape{
 	private GeoShape _g = null;
